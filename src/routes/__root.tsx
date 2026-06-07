@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "sham-cloud" },
+      { name: "description", content: "Sham Cloud Horizon offers a premium, futuristic cloud infrastructure platform with a bold Middle Eastern identity." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "sham-cloud" },
+      { property: "og:description", content: "Sham Cloud Horizon offers a premium, futuristic cloud infrastructure platform with a bold Middle Eastern identity." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "sham-cloud" },
+      { name: "twitter:description", content: "Sham Cloud Horizon offers a premium, futuristic cloud infrastructure platform with a bold Middle Eastern identity." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e5c6db08-fd1f-41da-8044-4825fb802b92/id-preview-0cb2f268--306182c4-40b0-4797-abc8-431d767b9331.lovable.app-1780857060879.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e5c6db08-fd1f-41da-8044-4825fb802b92/id-preview-0cb2f268--306182c4-40b0-4797-abc8-431d767b9331.lovable.app-1780857060879.png" },
     ],
     links: [
       {
