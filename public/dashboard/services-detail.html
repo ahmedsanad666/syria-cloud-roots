@@ -313,8 +313,18 @@
 
   reviewBtn.addEventListener('click', () => {
     if(!selectedPlan) return;
-    // Placeholder — Review step is built in the next prompt.
-    console.log('Continue to Request', { plan: selectedPlan, addons: Array.from(selectedAddons.entries()) });
+    const planCard = document.querySelector('#planGrid .plan-card.selected');
+    const specs = planCard ? Array.from(planCard.querySelectorAll('.plan-specs li')).map(li => ({
+      k: li.querySelector('.k').textContent, v: li.querySelector('.v').textContent
+    })) : [];
+    const payload = {
+      service: 'Cloud Infrastructure — IaaS',
+      plan: selectedPlan,
+      specs,
+      addons: Array.from(selectedAddons.entries()).map(([name,price]) => ({name,price}))
+    };
+    sessionStorage.setItem('shamcloud:request', JSON.stringify(payload));
+    window.location.href = '/dashboard/services-review.html';
   });
 
   // Mobile: collapse/expand summary
