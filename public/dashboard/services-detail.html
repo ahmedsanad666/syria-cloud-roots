@@ -227,25 +227,107 @@
 
 <script>
 (function(){
-  const cards = document.querySelectorAll('#planGrid .plan-card');
-  const btn = document.getElementById('continueBtn');
-  function select(card){
-    cards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+  const planCards = document.querySelectorAll('#planGrid .plan-card');
+  const continueBtn = document.getElementById('continueBtn');
+  const addonsWrap = document.getElementById('addons');
+  const addonCards = document.querySelectorAll('#addonGrid .addon-card');
+  const reviewBtn = document.getElementById('reviewBtn');
+  const sumPlan = document.getElementById('sumPlan');
+  const sumAddons = document.getElementById('sumAddons');
+  const sumTotal = document.getElementById('sumTotal');
+  const sumTotalMini = document.getElementById('summaryTotalMini');
+  const summaryPanel = document.getElementById('summaryPanel');
+  const summaryToggle = document.getElementById('summaryToggle');
+
+  let selectedPlan = null; // {name, price}
+  const selectedAddons = new Map(); // name -> price
+
+  function fmt(n){ return '$' + n; }
+
+  function renderSummary(){
+    if(selectedPlan){
+      sumPlan.textContent = selectedPlan.name + ' — ' + fmt(selectedPlan.price) + '/mo';
+    } else {
+      sumPlan.textContent = '—';
+    }
+    if(selectedAddons.size === 0){
+      sumAddons.innerHTML = '<div class="summary-empty">No add-ons selected</div>';
+    } else {
+      let html = '';
+      selectedAddons.forEach((price, name) => {
+        html += '<div class="summary-row"><span class="k">'+name+'</span><span class="v">+'+fmt(price)+'/mo</span></div>';
+      });
+      sumAddons.innerHTML = html;
+    }
+    let total = (selectedPlan ? selectedPlan.price : 0);
+    selectedAddons.forEach(p => total += p);
+    sumTotal.innerHTML = fmt(total) + '<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span>';
+    if(sumTotalMini) sumTotalMini.textContent = fmt(total) + '/mo';
+    if(selectedPlan){
+      reviewBtn.disabled = false;
+      reviewBtn.classList.add('on');
+    } else {
+      reviewBtn.disabled = true;
+      reviewBtn.classList.remove('on');
+    }
+  }
+
+  function selectPlan(card){
+    planCards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
     card.classList.add('selected');
     card.setAttribute('aria-pressed','true');
-    btn.disabled = false;
-    btn.classList.add('on');
+    selectedPlan = { name: card.dataset.plan, price: parseFloat(card.dataset.price) };
+    continueBtn.disabled = false;
+    continueBtn.classList.add('on');
+    addonsWrap.classList.add('on');
+    renderSummary();
   }
-  cards.forEach(c => {
-    c.addEventListener('click', () => select(c));
-    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(c); } });
+
+  planCards.forEach(c => {
+    c.addEventListener('click', () => selectPlan(c));
+    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectPlan(c); } });
   });
-  btn.addEventListener('click', () => {
-    document.getElementById('addons')?.scrollIntoView({behavior:'smooth', block:'start'});
+
+  continueBtn.addEventListener('click', () => {
+    addonsWrap.scrollIntoView({behavior:'smooth', block:'start'});
   });
+
+  function toggleAddon(card){
+    const name = card.dataset.addon;
+    const price = parseFloat(card.dataset.price);
+    if(selectedAddons.has(name)){
+      selectedAddons.delete(name);
+      card.classList.remove('selected');
+      card.setAttribute('aria-pressed','false');
+    } else {
+      selectedAddons.set(name, price);
+      card.classList.add('selected');
+      card.setAttribute('aria-pressed','true');
+    }
+    renderSummary();
+  }
+  addonCards.forEach(c => {
+    c.addEventListener('click', () => toggleAddon(c));
+    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleAddon(c); } });
+  });
+
+  reviewBtn.addEventListener('click', () => {
+    if(!selectedPlan) return;
+    // Placeholder — Review step is built in the next prompt.
+    console.log('Continue to Request', { plan: selectedPlan, addons: Array.from(selectedAddons.entries()) });
+  });
+
+  // Mobile: collapse/expand summary
+  if(summaryToggle){
+    summaryToggle.addEventListener('click', () => summaryPanel.classList.toggle('collapsed'));
+    if(window.innerWidth <= 1000) summaryPanel.classList.add('collapsed');
+  }
+
   document.querySelectorAll('.faq-item').forEach(it => {
     it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
   });
+
+  renderSummary();
 })();
 </script>
 
