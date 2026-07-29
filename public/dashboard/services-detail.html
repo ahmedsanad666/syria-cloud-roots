@@ -46,11 +46,132 @@
 
 <main class="main">
   <div class="page">
-    <h1>Service</h1>
-    <p class="lede">Plans and add-ons for the selected service.</p>
-    <div class="placeholder">Service content coming soon.</div>
+    <!-- Hero -->
+    <section class="detail-hero">
+      <div class="detail-hero-inner">
+        <div class="svc-ico blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18a4 4 0 0 1 0-8 6 6 0 0 1 11.5-1A4.5 4.5 0 0 1 18 18H6z"/></svg>
+        </div>
+        <div>
+          <span class="eyebrow">Sham Cloud</span>
+          <h1>Cloud Infrastructure — IaaS</h1>
+          <p>Elastic compute, storage, and networking hosted in-country. Scale workloads on demand with predictable pricing, high availability, and full API control.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section>
+      <div class="section-head">
+        <span class="section-label">What you get</span>
+        <h2>Purpose-built for production workloads</h2>
+        <p>Everything included in every plan — pick a tier below based on the capacity you need.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-tile"><div class="fi" style="background:linear-gradient(135deg,#3B8BEB,#5BA3F5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 4v16M4 8h16"/></svg></div><h4>Fast NVMe Storage</h4><p>Enterprise SSDs with high IOPS for databases and hot data.</p></div>
+        <div class="feature-tile"><div class="fi" style="background:linear-gradient(135deg,#22C87A,#34D399)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z"/></svg></div><h4>Built-in DDoS Protection</h4><p>Layer 3/4 mitigation included on every public IP by default.</p></div>
+        <div class="feature-tile"><div class="fi" style="background:linear-gradient(135deg,#6366F1,#8B5CF6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18"/></svg></div><h4>Local Data Residency</h4><p>Your data stays in-country with full compliance controls.</p></div>
+        <div class="feature-tile"><div class="fi" style="background:linear-gradient(135deg,#F59E0B,#FBBF24)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg></div><h4>API & Console Access</h4><p>Manage everything via a self-service console or REST API.</p></div>
+      </div>
+    </section>
+
+    <!-- Plan selection -->
+    <section>
+      <div class="section-head">
+        <span class="section-label">Choose a plan</span>
+        <h2>Select the tier that fits your workload</h2>
+        <p>You can adjust or add resources with add-ons in the next step.</p>
+      </div>
+
+      <div class="plan-grid" id="planGrid">
+        <div class="plan-card" data-tier="standard" data-plan="standard" tabindex="0" role="button" aria-pressed="false">
+          <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
+          <span class="plan-tier">Standard</span>
+          <div class="plan-name">Starter</div>
+          <div class="plan-price"><span class="per">Starting at</span><span class="amt">$29</span><span class="per">/mo</span></div>
+          <ul class="plan-specs">
+            <li><span class="k">vCPU</span><span class="v">2 cores</span></li>
+            <li><span class="k">RAM</span><span class="v">4 GB</span></li>
+            <li><span class="k">Storage</span><span class="v">80 GB NVMe</span></li>
+            <li><span class="k">Public IP</span><span class="v">1 IPv4</span></li>
+            <li><span class="k">Bandwidth</span><span class="v">2 TB / mo</span></li>
+          </ul>
+        </div>
+        <div class="plan-card" data-tier="professional" data-plan="professional" tabindex="0" role="button" aria-pressed="false">
+          <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
+          <span class="plan-tier">Professional</span>
+          <div class="plan-name">Business</div>
+          <div class="plan-price"><span class="per">Starting at</span><span class="amt">$79</span><span class="per">/mo</span></div>
+          <ul class="plan-specs">
+            <li><span class="k">vCPU</span><span class="v">4 cores</span></li>
+            <li><span class="k">RAM</span><span class="v">8 GB</span></li>
+            <li><span class="k">Storage</span><span class="v">200 GB NVMe</span></li>
+            <li><span class="k">Public IP</span><span class="v">1 IPv4 + 1 IPv6</span></li>
+            <li><span class="k">Bandwidth</span><span class="v">5 TB / mo</span></li>
+          </ul>
+        </div>
+        <div class="plan-card" data-tier="enterprise" data-plan="enterprise" tabindex="0" role="button" aria-pressed="false">
+          <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
+          <span class="plan-tier">Enterprise</span>
+          <div class="plan-name">Scale</div>
+          <div class="plan-price"><span class="per">Starting at</span><span class="amt">$179</span><span class="per">/mo</span></div>
+          <ul class="plan-specs">
+            <li><span class="k">vCPU</span><span class="v">8 cores</span></li>
+            <li><span class="k">RAM</span><span class="v">16 GB</span></li>
+            <li><span class="k">Storage</span><span class="v">500 GB NVMe</span></li>
+            <li><span class="k">Public IP</span><span class="v">2 IPv4 + 1 IPv6</span></li>
+            <li><span class="k">Bandwidth</span><span class="v">Unmetered</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="continue-bar">
+        <button class="btn btn-continue" id="continueBtn" disabled>Continue →</button>
+      </div>
+    </section>
+
+    <!-- Addons placeholder anchor (built in next step) -->
+    <section id="addons"></section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="section-head" style="text-align:center;max-width:640px;margin:0 auto 24px">
+        <span class="section-label">FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q">Where is the infrastructure physically located?</button><div class="faq-a">All Sham Cloud infrastructure is hosted in local data centers with full data residency and compliance controls.</div></div>
+        <div class="faq-item"><button class="faq-q">Can I upgrade or downgrade my plan later?</button><div class="faq-a">Yes. You can request a plan change at any time from the My Requests area; changes are typically applied within one business day.</div></div>
+        <div class="faq-item"><button class="faq-q">Is DDoS protection really included on every plan?</button><div class="faq-a">Yes. Layer 3/4 volumetric protection is included at no extra cost. Advanced application-layer protection is available as an add-on.</div></div>
+        <div class="faq-item"><button class="faq-q">What operating systems are supported?</button><div class="faq-a">Ubuntu, Debian, AlmaLinux, Rocky Linux, and Windows Server images are available; custom ISO uploads are supported on Professional and Enterprise plans.</div></div>
+      </div>
+    </section>
   </div>
 </main>
+
+<script>
+(function(){
+  const cards = document.querySelectorAll('#planGrid .plan-card');
+  const btn = document.getElementById('continueBtn');
+  function select(card){
+    cards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+    card.classList.add('selected');
+    card.setAttribute('aria-pressed','true');
+    btn.disabled = false;
+    btn.classList.add('on');
+  }
+  cards.forEach(c => {
+    c.addEventListener('click', () => select(c));
+    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(c); } });
+  });
+  btn.addEventListener('click', () => {
+    document.getElementById('addons')?.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  document.querySelectorAll('.faq-item').forEach(it => {
+    it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
+  });
+})();
+</script>
 
 <div class="backdrop"></div>
 <script src="/dashboard/dashboard.js"></script>
