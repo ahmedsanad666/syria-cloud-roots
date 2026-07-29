@@ -46,9 +46,89 @@
 
 <main class="main">
   <div class="page">
-    <h1>Welcome back</h1>
-    <p class="lede">Your dashboard overview will appear here.</p>
-    <div class="placeholder">Overview content coming soon.</div>
+    <h1>Welcome back, Sami</h1>
+    <p class="lede">Here's a snapshot of your services, requests, and activity on Sham Cloud.</p>
+
+    <!-- Stat cards -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-badge blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4zM4 14h16v6H4zM8 7h.01M8 17h.01"/></svg></div>
+        <div><div class="stat-num">4</div><div class="stat-lbl">Active Requests</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-badge amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div><div class="stat-num">2</div><div class="stat-lbl">Pending Review</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-badge green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg></div>
+        <div><div class="stat-num">7</div><div class="stat-lbl">Approved</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-badge violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+        <div><div class="stat-num">13</div><div class="stat-lbl">Total Services Requested</div></div>
+      </div>
+    </div>
+
+    <!-- Recent Requests -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Recent Requests</h2>
+        <a href="/dashboard/requests.html">View all →</a>
+      </div>
+      <div class="panel-body">
+        <table class="tbl">
+          <thead>
+            <tr><th>Service</th><th>Plan</th><th>Status</th><th>Date</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="svc" data-label="Service">IaaS — Virtual Servers</td>
+              <td data-label="Plan">Professional</td>
+              <td data-label="Status"><span class="badge review">In Review</span></td>
+              <td data-label="Date">Jul 28, 2026</td>
+              <td class="act" data-label=""><a href="/dashboard/requests-detail.html">View</a></td>
+            </tr>
+            <tr>
+              <td class="svc" data-label="Service">Sham Backup</td>
+              <td data-label="Plan">Standard</td>
+              <td data-label="Status"><span class="badge approved">Approved</span></td>
+              <td data-label="Date">Jul 24, 2026</td>
+              <td class="act" data-label=""><a href="/dashboard/requests-detail.html">View</a></td>
+            </tr>
+            <tr>
+              <td class="svc" data-label="Service">Sham Security — WAF</td>
+              <td data-label="Plan">Enterprise</td>
+              <td data-label="Status"><span class="badge pending">Pending</span></td>
+              <td data-label="Date">Jul 22, 2026</td>
+              <td class="act" data-label=""><a href="/dashboard/requests-detail.html">View</a></td>
+            </tr>
+            <tr>
+              <td class="svc" data-label="Service">Sham Host</td>
+              <td data-label="Plan">Standard</td>
+              <td data-label="Status"><span class="badge approved">Approved</span></td>
+              <td data-label="Date">Jul 15, 2026</td>
+              <td class="act" data-label=""><a href="/dashboard/requests-detail.html">View</a></td>
+            </tr>
+            <tr>
+              <td class="svc" data-label="Service">Managed Database</td>
+              <td data-label="Plan">Professional</td>
+              <td data-label="Status"><span class="badge rejected">Rejected</span></td>
+              <td data-label="Date">Jul 10, 2026</td>
+              <td class="act" data-label=""><a href="/dashboard/requests-detail.html">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CTA banner -->
+    <div class="cta-banner">
+      <div>
+        <h2>Need another service?</h2>
+        <p>Browse our full catalog of local cloud, hosting, backup, and security services — request a plan in a few clicks.</p>
+      </div>
+      <a class="btn btn-primary" href="/dashboard/services.html">Browse Services →</a>
+    </div>
   </div>
 </main>
 
