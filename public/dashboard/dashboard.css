@@ -427,3 +427,27 @@ body.app{
 .req-header .rid small{display:block;font-size:12px;color:var(--gray-500);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
 .req-grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
 @media(max-width:1000px){.req-grid{grid-template-columns:1fr}}
+
+/* ---- Profile ---- */
+.profile-header{display:flex;align-items:center;gap:20px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:24px;box-shadow:0 20px 40px -28px rgba(5,13,31,.12)}
+.profile-header .p-avatar{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,#6366F1,#3B8BEB);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;letter-spacing:.02em;flex-shrink:0}
+.profile-header .p-meta h2{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:var(--navy-900);margin-bottom:4px}
+.profile-header .p-meta .p-email{color:var(--gray-500);font-size:14px;margin-bottom:6px}
+.profile-header .p-meta .p-since{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-500);font-weight:600;text-transform:uppercase;letter-spacing:.08em;background:#F1F5F9;padding:5px 10px;border-radius:999px}
+.profile-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:24px}
+.profile-card h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;color:var(--navy-900);margin-bottom:4px}
+.profile-card .card-lede{color:var(--gray-500);font-size:13.5px;margin-bottom:20px}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.form-grid-2{grid-template-columns:1fr}}
+.form-field input[type=password]{width:100%;height:44px;padding:0 14px;border:1px solid var(--border);border-radius:10px;background:#fff;font-family:inherit;font-size:14px;color:var(--navy-900);transition:all .2s}
+.form-field input[type=password]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.form-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:8px}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:0 22px;height:44px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:#4F46E5;transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(99,102,241,.6)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-outline{background:#fff;color:var(--navy-900);border:1px solid var(--border);padding:0 22px;height:44px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-outline:hover{background:#F8FAFC;border-color:var(--navy-900)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy-900);color:#fff;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px -12px rgba(5,13,31,.4);transform:translateY(120%);opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);z-index:100;max-width:360px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast .toast-icon{width:22px;height:22px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.toast .toast-icon svg{width:14px;height:14px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
