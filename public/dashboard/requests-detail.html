@@ -46,11 +46,209 @@
 
 <main class="main">
   <div class="page">
-    <h1>Request</h1>
-    <p class="lede">Full breakdown of your submitted request.</p>
-    <div class="placeholder">Request content coming soon.</div>
+
+    <div style="margin-bottom:16px">
+      <a href="/dashboard/requests.html" style="color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px">← Back to My Requests</a>
+    </div>
+
+    <div class="req-header">
+      <div>
+        <div class="rid">
+          <small id="dRid">SC-000000</small>
+          <span id="dService">Service name</span>
+        </div>
+        <div style="margin-top:8px"><span class="badge" id="dBadge">Pending</span> <span style="color:var(--gray-500);font-size:13px;margin-left:6px">Submitted <span id="dDate">—</span></span></div>
+      </div>
+      <div id="cancelWrap" style="display:none">
+        <button class="btn-danger" id="cancelBtn">Cancel Request</button>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <h3><span class="ix">•</span> Status timeline</h3>
+      <div class="stepper" id="stepper"></div>
+    </div>
+
+    <div class="req-grid">
+      <div>
+        <div class="review-card">
+          <h3><span class="ix">1</span> Service & plan</h3>
+          <div class="review-row"><span class="k">Service</span><span class="v" id="dService2">—</span></div>
+          <div class="review-row"><span class="k">Plan</span><span class="v" id="dPlan">—</span></div>
+          <div id="dSpecs"></div>
+        </div>
+
+        <div class="review-card">
+          <h3><span class="ix">2</span> Add-ons</h3>
+          <div id="dAddons"><div class="review-empty">No add-ons selected</div></div>
+        </div>
+
+        <div class="review-card">
+          <h3><span class="ix">3</span> Contact details</h3>
+          <div class="review-row"><span class="k">Full Name</span><span class="v" id="dName">—</span></div>
+          <div class="review-row"><span class="k">Email</span><span class="v" id="dEmail">—</span></div>
+          <div class="review-row"><span class="k">Phone</span><span class="v" id="dPhone">—</span></div>
+        </div>
+      </div>
+
+      <aside class="summary-panel" style="position:sticky;top:96px">
+        <div class="summary-body">
+          <h3>Estimated total</h3>
+          <div class="summary-row"><span class="k">Plan</span><span class="v" id="dSidePlan">—</span></div>
+          <div class="summary-row"><span class="k">Add-ons</span><span class="v" id="dSideAddons">0 selected</span></div>
+          <div class="summary-total"><span class="k">Total</span><span class="v" id="dTotal">$0<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span></span></div>
+          <div class="summary-note">Informational estimate — no payment required</div>
+        </div>
+      </aside>
+    </div>
   </div>
 </main>
+
+<!-- Cancel confirmation modal -->
+<div class="modal-overlay" id="cancelModal">
+  <div class="modal">
+    <h3>Cancel this request?</h3>
+    <p>Once cancelled, this request will be closed and cannot be reopened. You can always submit a new request from the Services page.</p>
+    <div class="modal-actions">
+      <button class="btn-ghost-line" id="cancelClose">Keep Request</button>
+      <button class="btn-danger" id="cancelConfirm">Yes, Cancel Request</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const MOCK = [
+    { id:'SC-A8F210', service:'Cloud Infrastructure — IaaS', plan:{name:'Business',price:79},
+      specs:[{k:'vCPU',v:'4 cores'},{k:'RAM',v:'8 GB'},{k:'Storage',v:'200 GB NVMe'},{k:'Bandwidth',v:'5 TB / mo'}],
+      addons:[{name:'Load Balancer',price:15},{name:'24/7 Monitoring',price:10}],
+      status:'In Review', submittedAt:'2026-07-24T09:14:00Z',
+      contact:{name:'Sami Al-Ahmad',email:'sami@example.com',phone:'+963 933 000 001'} },
+    { id:'SC-B7C331', service:'Managed Backup', plan:{name:'Starter',price:29},
+      specs:[{k:'Retention',v:'14 days'},{k:'Storage',v:'100 GB'}],
+      addons:[{name:'Snapshot',price:8}],
+      status:'Approved', submittedAt:'2026-07-18T13:02:00Z',
+      contact:{name:'Sami Al-Ahmad',email:'sami@example.com',phone:'+963 933 000 001'} },
+    { id:'SC-9D1F44', service:'Web Application Firewall', plan:{name:'Business',price:79},
+      specs:[{k:'Rulesets',v:'OWASP Top 10'},{k:'Traffic',v:'Unlimited'}],
+      addons:[{name:'Web Application Firewall (WAF)',price:18}],
+      status:'Pending', submittedAt:'2026-07-27T16:40:00Z',
+      contact:{name:'Sami Al-Ahmad',email:'sami@example.com',phone:'+963 933 000 001'} },
+    { id:'SC-4E22A9', service:'Virtual Private Server', plan:{name:'Scale',price:179},
+      specs:[{k:'vCPU',v:'8 cores'},{k:'RAM',v:'16 GB'},{k:'Storage',v:'500 GB NVMe'}],
+      addons:[],
+      status:'Rejected', submittedAt:'2026-07-10T08:20:00Z',
+      contact:{name:'Sami Al-Ahmad',email:'sami@example.com',phone:'+963 933 000 001'} },
+    { id:'SC-2A55B8', service:'DDoS Protection', plan:{name:'Starter',price:29},
+      specs:[{k:'Layer',v:'L3 / L4 / L7'}],
+      addons:[{name:'DDoS Protection',price:12}],
+      status:'Approved', submittedAt:'2026-06-30T11:05:00Z',
+      contact:{name:'Sami Al-Ahmad',email:'sami@example.com',phone:'+963 933 000 001'} },
+    { id:'SC-77E019', service:'Cloud Infrastructure — IaaS', plan:{name:'Scale',price:179},
+      specs:[{k:'vCPU',v:'8 cores'},{k:'RAM',v:'16 GB'},{k:'Storage',v:'500 GB NVMe'}],
+      addons:[{name:'Managed Firewall / NGFW',price:20},{name:'Load Balancer',price:15}],
+      status:'In Review', submittedAt:'2026-07-22T18:47:00Z',
+      contact:{name:'Sami Al-Ahmad',email:'sami@example.com',phone:'+963 933 000 001'} },
+  ];
+
+  // Merge with locally-submitted requests (may have partial shape)
+  let user = [];
+  try { user = JSON.parse(localStorage.getItem('shamcloud:requests') || '[]'); } catch(e){}
+  const normalized = user.map(r => ({
+    id: r.id,
+    service: r.service,
+    plan: typeof r.plan === 'object' ? r.plan : { name: r.plan, price: r.total || 0 },
+    specs: r.specs || [],
+    addons: r.addons || [],
+    status: r.status || 'Pending',
+    submittedAt: r.submittedAt,
+    contact: r.contact || (JSON.parse(localStorage.getItem('shamcloud:profile')||'{}'))
+  }));
+  const all = [...normalized, ...MOCK];
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || all[0].id;
+  const req = all.find(r => r.id === id) || all[0];
+
+  const badgeClass = { 'Pending':'pending', 'In Review':'review', 'Approved':'approved', 'Rejected':'rejected' };
+  const fmt = iso => iso ? new Date(iso).toLocaleDateString('en-US', {year:'numeric',month:'short',day:'numeric'}) : '—';
+
+  document.getElementById('dRid').textContent = 'Request ' + req.id;
+  document.getElementById('dService').textContent = req.service;
+  document.getElementById('dService2').textContent = req.service;
+  document.getElementById('dPlan').textContent = (req.plan.name || req.plan) + (req.plan.price ? ' — $' + req.plan.price + '/mo' : '');
+  document.getElementById('dDate').textContent = fmt(req.submittedAt);
+  const badge = document.getElementById('dBadge');
+  badge.className = 'badge ' + badgeClass[req.status];
+  badge.textContent = req.status;
+
+  const specsWrap = document.getElementById('dSpecs');
+  if(req.specs && req.specs.length){
+    specsWrap.innerHTML = req.specs.map(s =>
+      '<div class="review-row"><span class="k">'+s.k+'</span><span class="v">'+s.v+'</span></div>'
+    ).join('');
+  }
+
+  let addonTotal = 0;
+  const addonsEl = document.getElementById('dAddons');
+  if(req.addons && req.addons.length){
+    addonsEl.innerHTML = req.addons.map(a => {
+      addonTotal += a.price;
+      return '<div class="review-row"><span class="k">'+a.name+'</span><span class="v">+$'+a.price+'/mo</span></div>';
+    }).join('');
+    document.getElementById('dSideAddons').textContent = req.addons.length + ' selected (+$' + addonTotal + '/mo)';
+  }
+
+  const planPrice = req.plan.price || 0;
+  const total = planPrice + addonTotal;
+  document.getElementById('dSidePlan').textContent = (req.plan.name || req.plan) + (planPrice ? ' ($' + planPrice + '/mo)' : '');
+  document.getElementById('dTotal').innerHTML = '$' + total + '<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span>';
+
+  const c = req.contact || {};
+  document.getElementById('dName').textContent = c.name || '—';
+  document.getElementById('dEmail').textContent = c.email || '—';
+  document.getElementById('dPhone').textContent = c.phone || '—';
+
+  // Stepper
+  const stepper = document.getElementById('stepper');
+  const isRejected = req.status === 'Rejected';
+  const stages = [
+    { key:'Submitted',  label:'Submitted' },
+    { key:'In Review',  label:'In Review' },
+    { key: isRejected ? 'Rejected' : 'Approved', label: isRejected ? 'Rejected' : 'Approved' },
+  ];
+  const stateOrder = { 'Pending':0, 'In Review':1, 'Approved':2, 'Rejected':2 };
+  const currentIdx = stateOrder[req.status] ?? 0;
+  stepper.innerHTML = stages.map((s,i) => {
+    let cls = '';
+    if(i < currentIdx) cls = 'done';
+    else if(i === currentIdx) cls = (isRejected && i === 2) ? 'rejected' : 'current';
+    return `<div class="step ${cls}">
+      <div class="dot">${i < currentIdx ? '✓' : (i+1)}</div>
+      <div class="lbl">${s.label}</div>
+      <div class="when">${i <= currentIdx ? (i === 0 ? fmt(req.submittedAt) : '') : ''}</div>
+    </div>`;
+  }).join('');
+
+  // Cancel modal (only when Pending)
+  if(req.status === 'Pending'){
+    document.getElementById('cancelWrap').style.display = 'block';
+  }
+  const modal = document.getElementById('cancelModal');
+  document.getElementById('cancelBtn')?.addEventListener('click', () => modal.classList.add('on'));
+  document.getElementById('cancelClose').addEventListener('click', () => modal.classList.remove('on'));
+  modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('on'); });
+  document.getElementById('cancelConfirm').addEventListener('click', () => {
+    // Remove from local store if present
+    try {
+      const list = JSON.parse(localStorage.getItem('shamcloud:requests') || '[]')
+        .filter(r => r.id !== req.id);
+      localStorage.setItem('shamcloud:requests', JSON.stringify(list));
+    } catch(e){}
+    window.location.href = '/dashboard/requests.html';
+  });
+})();
+</script>
 
 <div class="backdrop"></div>
 <script src="/dashboard/dashboard.js"></script>
