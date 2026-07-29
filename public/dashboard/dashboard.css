@@ -133,3 +133,68 @@ body.app{
   }
   .backdrop.open{display:block}
 }
+
+/* === Overview page === */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:32px}
+.stat-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px;transition:all .2s ease}
+.stat-card:hover{border-color:transparent;box-shadow:0 12px 30px -12px rgba(5,13,31,.12);transform:translateY(-2px)}
+.stat-badge{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff}
+.stat-badge svg{width:22px;height:22px}
+.stat-badge.blue{background:linear-gradient(135deg,#3B8BEB,#5BA3F5)}
+.stat-badge.amber{background:linear-gradient(135deg,#F59E0B,#FBBF24)}
+.stat-badge.green{background:linear-gradient(135deg,#22C87A,#34D399)}
+.stat-badge.violet{background:linear-gradient(135deg,#6366F1,#8B5CF6)}
+.stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;color:var(--navy-900);letter-spacing:-.02em;line-height:1}
+.stat-lbl{font-size:13.5px;color:var(--gray-500);font-weight:500}
+
+/* === Panel === */
+.panel{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border)}
+.panel-head h2{font-size:18px;color:var(--navy-900);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700}
+.panel-head a{color:var(--accent);font-size:13.5px;font-weight:600}
+.panel-body{padding:8px 0}
+
+/* === Table === */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;font-weight:600;color:var(--gray-500);font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:12px 24px;background:var(--gray-100)}
+.tbl td{padding:16px 24px;border-top:1px solid var(--border);color:var(--gray-700);vertical-align:middle}
+.tbl tr:first-child td{border-top:none}
+.tbl td.svc{font-weight:600;color:var(--navy-900)}
+.tbl td.act a{color:var(--accent);font-weight:600;font-size:13.5px}
+
+/* === Status badge === */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.4}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.pending{background:#F1F5F9;color:#64748B}
+.badge.review{background:#E0EDFF;color:#2563EB}
+.badge.approved{background:#DCFCE7;color:#16A34A}
+.badge.rejected{background:#FEE2E2;color:#DC2626}
+
+/* === Empty state === */
+.empty{padding:48px 24px;text-align:center;color:var(--gray-500)}
+.empty h3{color:var(--navy-900);margin-bottom:8px;font-size:17px}
+.empty p{font-size:14px;margin-bottom:20px}
+
+/* === CTA banner === */
+.cta-banner{
+  background:linear-gradient(120deg,var(--navy-900),var(--navy-700) 60%,var(--accent));
+  color:#fff;border-radius:20px;padding:32px 36px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  position:relative;overflow:hidden;
+}
+.cta-banner::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.12) 1px,transparent 0);background-size:24px 24px;opacity:.5;pointer-events:none}
+.cta-banner h2{color:#fff;font-size:22px;margin-bottom:6px}
+.cta-banner p{color:rgba(255,255,255,.75);font-size:14.5px;max-width:520px}
+.cta-banner .btn{position:relative;z-index:1;background:#fff;color:var(--navy-900);height:46px;padding:0 22px}
+.cta-banner .btn:hover{background:var(--accent-soft)}
+@media(max-width:700px){.cta-banner{flex-direction:column;align-items:flex-start;text-align:left}}
+
+/* Table mobile */
+@media(max-width:700px){
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl tr{border-top:1px solid var(--border);padding:12px 20px}
+  .tbl td{padding:6px 0;border:none}
+  .tbl td::before{content:attr(data-label) ": ";color:var(--gray-500);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-right:8px}
+  .tbl td.svc::before{display:none}
+}
