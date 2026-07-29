@@ -75,6 +75,8 @@
       </div>
     </section>
 
+    <div class="detail-layout">
+      <div>
     <!-- Plan selection -->
     <section>
       <div class="section-head">
@@ -84,7 +86,7 @@
       </div>
 
       <div class="plan-grid" id="planGrid">
-        <div class="plan-card" data-tier="standard" data-plan="standard" tabindex="0" role="button" aria-pressed="false">
+        <div class="plan-card" data-tier="standard" data-plan="Starter" data-price="29" tabindex="0" role="button" aria-pressed="false">
           <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
           <span class="plan-tier">Standard</span>
           <div class="plan-name">Starter</div>
@@ -97,7 +99,7 @@
             <li><span class="k">Bandwidth</span><span class="v">2 TB / mo</span></li>
           </ul>
         </div>
-        <div class="plan-card" data-tier="professional" data-plan="professional" tabindex="0" role="button" aria-pressed="false">
+        <div class="plan-card" data-tier="professional" data-plan="Business" data-price="79" tabindex="0" role="button" aria-pressed="false">
           <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
           <span class="plan-tier">Professional</span>
           <div class="plan-name">Business</div>
@@ -110,7 +112,7 @@
             <li><span class="k">Bandwidth</span><span class="v">5 TB / mo</span></li>
           </ul>
         </div>
-        <div class="plan-card" data-tier="enterprise" data-plan="enterprise" tabindex="0" role="button" aria-pressed="false">
+        <div class="plan-card" data-tier="enterprise" data-plan="Scale" data-price="179" tabindex="0" role="button" aria-pressed="false">
           <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
           <span class="plan-tier">Enterprise</span>
           <div class="plan-name">Scale</div>
@@ -126,12 +128,86 @@
       </div>
 
       <div class="continue-bar">
-        <button class="btn btn-continue" id="continueBtn" disabled>Continue →</button>
+        <button class="btn btn-continue" id="continueBtn" disabled>Continue to add-ons →</button>
       </div>
     </section>
 
-    <!-- Addons placeholder anchor (built in next step) -->
-    <section id="addons"></section>
+    <!-- Addons -->
+    <section class="addons-wrap" id="addons">
+      <div class="section-head">
+        <span class="section-label">Add-ons</span>
+        <h2>Enhance your plan with optional services</h2>
+        <p>Select any add-ons you'd like included in your request. You can adjust these anytime.</p>
+      </div>
+      <div class="addon-grid" id="addonGrid">
+        <div class="addon-card" data-addon="Backup" data-price="8" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Backup</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Automated daily backups with 14-day retention.</p>
+          <div class="price">+$8/mo</div>
+        </div>
+        <div class="addon-card" data-addon="Snapshot" data-price="5" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Snapshot</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>On-demand point-in-time snapshots of your instance.</p>
+          <div class="price">+$5/mo</div>
+        </div>
+        <div class="addon-card" data-addon="Additional Public IP" data-price="4" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Additional Public IP</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Extra IPv4 address for multi-service routing.</p>
+          <div class="price">+$4/mo</div>
+        </div>
+        <div class="addon-card" data-addon="Load Balancer" data-price="15" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Load Balancer</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Distribute traffic across multiple instances with HA.</p>
+          <div class="price">+$15/mo</div>
+        </div>
+        <div class="addon-card" data-addon="Managed Firewall / NGFW" data-price="20" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Managed Firewall / NGFW</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Next-gen firewall with deep packet inspection.</p>
+          <div class="price">+$20/mo</div>
+        </div>
+        <div class="addon-card" data-addon="Web Application Firewall (WAF)" data-price="18" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Web Application Firewall (WAF)</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Layer-7 protection against OWASP Top 10 threats.</p>
+          <div class="price">+$18/mo</div>
+        </div>
+        <div class="addon-card" data-addon="24/7 Monitoring" data-price="10" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>24/7 Monitoring</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Round-the-clock health checks and incident alerts.</p>
+          <div class="price">+$10/mo</div>
+        </div>
+        <div class="addon-card" data-addon="Dedicated IP" data-price="6" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>Dedicated IP</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Reserved static IP address exclusive to your service.</p>
+          <div class="price">+$6/mo</div>
+        </div>
+        <div class="addon-card" data-addon="DDoS Protection" data-price="12" tabindex="0" role="button" aria-pressed="false">
+          <div class="ah"><h4>DDoS Protection</h4><div class="addon-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div></div>
+          <p>Advanced L7 mitigation on top of default L3/4 shield.</p>
+          <div class="price">+$12/mo</div>
+        </div>
+      </div>
+    </section>
+      </div>
+
+      <!-- Sticky summary -->
+      <aside class="summary-panel" id="summaryPanel">
+        <button class="summary-toggle" id="summaryToggle" aria-label="Toggle summary">
+          <span><strong style="color:var(--navy-900)">Estimated total</strong> <span id="summaryTotalMini" style="color:var(--accent);font-weight:800">$0/mo</span></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg>
+        </button>
+        <div class="summary-body">
+          <h3>Your request</h3>
+          <div class="summary-row"><span class="k">Service</span><span class="v">Cloud Infrastructure — IaaS</span></div>
+          <div class="summary-row"><span class="k">Plan</span><span class="v" id="sumPlan">—</span></div>
+          <div id="sumAddons" class="summary-list">
+            <div class="summary-empty">No add-ons selected</div>
+          </div>
+          <div class="summary-total"><span class="k">Estimated Total</span><span class="v" id="sumTotal">$0<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span></span></div>
+          <div class="summary-note">Informational estimate — no payment required</div>
+          <button class="btn btn-continue" id="reviewBtn" disabled>Continue to Request →</button>
+        </div>
+      </aside>
+    </div>
 
     <!-- FAQ -->
     <section>
@@ -151,25 +227,107 @@
 
 <script>
 (function(){
-  const cards = document.querySelectorAll('#planGrid .plan-card');
-  const btn = document.getElementById('continueBtn');
-  function select(card){
-    cards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+  const planCards = document.querySelectorAll('#planGrid .plan-card');
+  const continueBtn = document.getElementById('continueBtn');
+  const addonsWrap = document.getElementById('addons');
+  const addonCards = document.querySelectorAll('#addonGrid .addon-card');
+  const reviewBtn = document.getElementById('reviewBtn');
+  const sumPlan = document.getElementById('sumPlan');
+  const sumAddons = document.getElementById('sumAddons');
+  const sumTotal = document.getElementById('sumTotal');
+  const sumTotalMini = document.getElementById('summaryTotalMini');
+  const summaryPanel = document.getElementById('summaryPanel');
+  const summaryToggle = document.getElementById('summaryToggle');
+
+  let selectedPlan = null; // {name, price}
+  const selectedAddons = new Map(); // name -> price
+
+  function fmt(n){ return '$' + n; }
+
+  function renderSummary(){
+    if(selectedPlan){
+      sumPlan.textContent = selectedPlan.name + ' — ' + fmt(selectedPlan.price) + '/mo';
+    } else {
+      sumPlan.textContent = '—';
+    }
+    if(selectedAddons.size === 0){
+      sumAddons.innerHTML = '<div class="summary-empty">No add-ons selected</div>';
+    } else {
+      let html = '';
+      selectedAddons.forEach((price, name) => {
+        html += '<div class="summary-row"><span class="k">'+name+'</span><span class="v">+'+fmt(price)+'/mo</span></div>';
+      });
+      sumAddons.innerHTML = html;
+    }
+    let total = (selectedPlan ? selectedPlan.price : 0);
+    selectedAddons.forEach(p => total += p);
+    sumTotal.innerHTML = fmt(total) + '<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span>';
+    if(sumTotalMini) sumTotalMini.textContent = fmt(total) + '/mo';
+    if(selectedPlan){
+      reviewBtn.disabled = false;
+      reviewBtn.classList.add('on');
+    } else {
+      reviewBtn.disabled = true;
+      reviewBtn.classList.remove('on');
+    }
+  }
+
+  function selectPlan(card){
+    planCards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
     card.classList.add('selected');
     card.setAttribute('aria-pressed','true');
-    btn.disabled = false;
-    btn.classList.add('on');
+    selectedPlan = { name: card.dataset.plan, price: parseFloat(card.dataset.price) };
+    continueBtn.disabled = false;
+    continueBtn.classList.add('on');
+    addonsWrap.classList.add('on');
+    renderSummary();
   }
-  cards.forEach(c => {
-    c.addEventListener('click', () => select(c));
-    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(c); } });
+
+  planCards.forEach(c => {
+    c.addEventListener('click', () => selectPlan(c));
+    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectPlan(c); } });
   });
-  btn.addEventListener('click', () => {
-    document.getElementById('addons')?.scrollIntoView({behavior:'smooth', block:'start'});
+
+  continueBtn.addEventListener('click', () => {
+    addonsWrap.scrollIntoView({behavior:'smooth', block:'start'});
   });
+
+  function toggleAddon(card){
+    const name = card.dataset.addon;
+    const price = parseFloat(card.dataset.price);
+    if(selectedAddons.has(name)){
+      selectedAddons.delete(name);
+      card.classList.remove('selected');
+      card.setAttribute('aria-pressed','false');
+    } else {
+      selectedAddons.set(name, price);
+      card.classList.add('selected');
+      card.setAttribute('aria-pressed','true');
+    }
+    renderSummary();
+  }
+  addonCards.forEach(c => {
+    c.addEventListener('click', () => toggleAddon(c));
+    c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleAddon(c); } });
+  });
+
+  reviewBtn.addEventListener('click', () => {
+    if(!selectedPlan) return;
+    // Placeholder — Review step is built in the next prompt.
+    console.log('Continue to Request', { plan: selectedPlan, addons: Array.from(selectedAddons.entries()) });
+  });
+
+  // Mobile: collapse/expand summary
+  if(summaryToggle){
+    summaryToggle.addEventListener('click', () => summaryPanel.classList.toggle('collapsed'));
+    if(window.innerWidth <= 1000) summaryPanel.classList.add('collapsed');
+  }
+
   document.querySelectorAll('.faq-item').forEach(it => {
     it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
   });
+
+  renderSummary();
 })();
 </script>
 
