@@ -389,3 +389,41 @@ body.app{
 .confirm-actions .btn{height:46px;padding:0 22px;border-radius:10px;font-size:14px}
 .confirm-actions .btn-primary{background:var(--accent);color:#fff}
 .confirm-actions .btn-primary:hover{background:#4F46E5}
+
+/* === Requests list toolbar === */
+.req-toolbar{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;margin-bottom:20px}
+.tbl td.rid{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:var(--accent);font-size:13.5px;letter-spacing:.02em}
+.tbl tr.row-link{cursor:pointer;transition:background .15s}
+.tbl tr.row-link:hover{background:var(--gray-100)}
+
+/* === Timeline / stepper === */
+.stepper{display:flex;align-items:flex-start;gap:0;margin:8px 0 4px;flex-wrap:wrap}
+.step{flex:1;min-width:120px;display:flex;flex-direction:column;align-items:center;position:relative;padding:0 6px}
+.step + .step::before{content:"";position:absolute;top:14px;left:calc(-50% + 16px);right:calc(50% + 16px);height:2px;background:var(--border)}
+.step.done + .step::before,.step.current + .step::before{background:var(--accent)}
+.step .dot{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--border);color:var(--gray-500);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;position:relative;z-index:1;transition:all .2s}
+.step .lbl{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--gray-500);text-align:center}
+.step .when{margin-top:2px;font-size:11px;color:var(--gray-500)}
+.step.done .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+.step.done .lbl{color:var(--navy-900)}
+.step.current .dot{background:#fff;border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px rgba(99,102,241,.15)}
+.step.current .lbl{color:var(--accent)}
+.step.rejected .dot{background:#DC2626;border-color:#DC2626;color:#fff}
+.step.rejected .lbl{color:#DC2626}
+
+/* === Modal (confirm dialog) === */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,13,31,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.on{display:flex}
+.modal{background:#fff;border-radius:18px;padding:28px;max-width:440px;width:100%;box-shadow:0 30px 80px -20px rgba(5,13,31,.5)}
+.modal h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;color:var(--navy-900);margin-bottom:8px}
+.modal p{color:var(--gray-500);font-size:14px;line-height:1.6;margin-bottom:20px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.btn-danger{background:#DC2626;color:#fff;height:44px;padding:0 20px;border-radius:10px;border:none;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s}
+.btn-danger:hover{background:#B91C1C;box-shadow:0 12px 30px -8px rgba(220,38,38,.5)}
+
+/* Request detail */
+.req-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.req-header .rid{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;color:var(--navy-900);letter-spacing:-.01em}
+.req-header .rid small{display:block;font-size:12px;color:var(--gray-500);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.req-grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+@media(max-width:1000px){.req-grid{grid-template-columns:1fr}}
