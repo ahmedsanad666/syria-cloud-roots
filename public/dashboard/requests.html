@@ -46,11 +46,106 @@
 
 <main class="main">
   <div class="page">
-    <h1>My Requests</h1>
-    <p class="lede">Track the status of every request you've submitted.</p>
-    <div class="placeholder">My Requests content coming soon.</div>
+    <div class="section-head" style="margin-bottom:20px">
+      <span class="section-label">Activity</span>
+      <h2>My Requests</h2>
+      <p>Track the status of every request you've submitted.</p>
+    </div>
+
+    <div class="req-toolbar">
+      <div class="pill-tabs" id="statusTabs">
+        <button class="pill-tab active" data-status="all">All</button>
+        <button class="pill-tab" data-status="Pending">Pending</button>
+        <button class="pill-tab" data-status="In Review">In Review</button>
+        <button class="pill-tab" data-status="Approved">Approved</button>
+        <button class="pill-tab" data-status="Rejected">Rejected</button>
+      </div>
+    </div>
+
+    <div class="panel" style="padding:0;overflow:hidden">
+      <table class="tbl" id="reqTable">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Service</th>
+            <th>Plan</th>
+            <th>Status</th>
+            <th>Submitted</th>
+            <th style="text-align:right">Action</th>
+          </tr>
+        </thead>
+        <tbody id="reqBody"></tbody>
+      </table>
+    </div>
+
+    <div class="no-results" id="emptyState" style="border-radius:16px;margin-top:16px">
+      <h3>No requests to show</h3>
+      <p style="margin-bottom:18px">You haven't submitted any requests in this category yet.</p>
+      <a class="btn btn-primary" href="/dashboard/services.html" style="display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none">Browse Services</a>
+    </div>
   </div>
 </main>
+
+<script>
+(function(){
+  const MOCK = [
+    { id:'SC-A8F210', service:'Cloud Infrastructure — IaaS', plan:'Business',    total:79+15+10, status:'In Review', submittedAt:'2026-07-24T09:14:00Z' },
+    { id:'SC-B7C331', service:'Managed Backup',              plan:'Starter',     total:29+8,     status:'Approved',  submittedAt:'2026-07-18T13:02:00Z' },
+    { id:'SC-9D1F44', service:'Web Application Firewall',    plan:'Business',    total:79+18,    status:'Pending',   submittedAt:'2026-07-27T16:40:00Z' },
+    { id:'SC-4E22A9', service:'Virtual Private Server',      plan:'Scale',       total:179,      status:'Rejected',  submittedAt:'2026-07-10T08:20:00Z' },
+    { id:'SC-2A55B8', service:'DDoS Protection',             plan:'Starter',     total:29+12,    status:'Approved',  submittedAt:'2026-06-30T11:05:00Z' },
+    { id:'SC-77E019', service:'Cloud Infrastructure — IaaS', plan:'Scale',       total:179+20+15,status:'In Review', submittedAt:'2026-07-22T18:47:00Z' },
+  ];
+
+  // Merge with anything submitted from the review flow
+  let user = [];
+  try { user = JSON.parse(localStorage.getItem('shamcloud:requests') || '[]'); } catch(e){}
+  const all = [...user, ...MOCK];
+
+  const badgeClass = { 'Pending':'pending', 'In Review':'review', 'Approved':'approved', 'Rejected':'rejected' };
+  const fmtDate = iso => new Date(iso).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+
+  const body = document.getElementById('reqBody');
+  const empty = document.getElementById('emptyState');
+  const tabs = document.querySelectorAll('#statusTabs .pill-tab');
+
+  function render(filter){
+    const rows = all.filter(r => filter === 'all' || r.status === filter);
+    if(rows.length === 0){
+      body.innerHTML = '';
+      empty.classList.add('show');
+      document.getElementById('reqTable').style.display = 'none';
+      return;
+    }
+    empty.classList.remove('show');
+    document.getElementById('reqTable').style.display = '';
+    body.innerHTML = rows.map(r => `
+      <tr class="row-link" data-id="${r.id}">
+        <td class="rid" data-label="Request ID">${r.id}</td>
+        <td class="svc" data-label="Service">${r.service}</td>
+        <td data-label="Plan">${r.plan}</td>
+        <td data-label="Status"><span class="badge ${badgeClass[r.status]}">${r.status}</span></td>
+        <td data-label="Submitted">${fmtDate(r.submittedAt)}</td>
+        <td class="act" data-label="Action" style="text-align:right"><a href="/dashboard/requests-detail.html?id=${encodeURIComponent(r.id)}">View →</a></td>
+      </tr>
+    `).join('');
+    body.querySelectorAll('tr.row-link').forEach(tr => {
+      tr.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A') return;
+        window.location.href = '/dashboard/requests-detail.html?id=' + encodeURIComponent(tr.dataset.id);
+      });
+    });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    render(t.dataset.status);
+  }));
+
+  render('all');
+})();
+</script>
 
 <div class="backdrop"></div>
 <script src="/dashboard/dashboard.js"></script>
