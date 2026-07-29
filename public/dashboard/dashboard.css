@@ -1,0 +1,135 @@
+/* === Sham Cloud — Dashboard shell === */
+@import url("/style.css");
+
+:root{
+  --accent:#6366F1;          /* indigo/purple active pill */
+  --accent-soft:#EEF0FF;
+  --sidebar-w:264px;
+  --topbar-h:68px;
+  --panel:#FFFFFF;
+  --app-bg:#F4F6FA;
+  --border:#E8ECF4;
+}
+
+body.app{
+  background:var(--app-bg);
+  color:var(--gray-700);
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:var(--sidebar-w) 1fr;
+  grid-template-rows:var(--topbar-h) 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
+}
+
+/* === Sidebar === */
+.side{
+  grid-area:sidebar;
+  background:var(--navy-900);
+  color:#fff;
+  padding:22px 16px;
+  display:flex;flex-direction:column;gap:24px;
+  position:sticky;top:0;height:100vh;
+  border-right:1px solid rgba(255,255,255,.05);
+}
+.side .brand{padding:6px 8px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.side .brand-icon{width:32px;height:32px}
+.side-nav{list-style:none;display:flex;flex-direction:column;gap:4px;flex:1}
+.side-nav a{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-radius:10px;
+  color:rgba(255,255,255,.72);
+  font-size:14.5px;font-weight:500;
+  transition:all .2s ease;
+}
+.side-nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.side-nav a.active{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:0 6px 18px -6px rgba(99,102,241,.6);
+}
+.side-nav a svg{width:18px;height:18px;flex-shrink:0}
+.side-foot{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:14px;font-size:12px;color:rgba(255,255,255,.4);
+}
+
+/* === Topbar === */
+.top{
+  grid-area:topbar;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;position:sticky;top:0;z-index:20;
+}
+.top-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:var(--navy-900);letter-spacing:-.01em}
+.top-actions{display:flex;align-items:center;gap:14px}
+.top-lang{
+  font-size:13px;font-weight:600;color:var(--gray-700);
+  padding:6px 12px;border-radius:8px;border:1px solid var(--border);
+  background:#fff;cursor:pointer;
+}
+.avatar-menu{position:relative}
+.avatar-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:5px 12px 5px 5px;border-radius:999px;
+  border:1px solid var(--border);background:#fff;cursor:pointer;
+  font-family:inherit;font-size:13.5px;font-weight:600;color:var(--navy-900);
+}
+.avatar-btn:hover{border-color:var(--accent)}
+.avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--blue-500));
+  color:#fff;font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+}
+.avatar-dropdown{
+  position:absolute;right:0;top:calc(100% + 8px);
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  box-shadow:0 20px 40px -12px rgba(5,13,31,.15);
+  min-width:200px;padding:6px;display:none;
+}
+.avatar-dropdown.open{display:block}
+.avatar-dropdown a{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:8px;
+  font-size:14px;color:var(--gray-700);font-weight:500;
+}
+.avatar-dropdown a:hover{background:var(--gray-100);color:var(--navy-900)}
+.avatar-dropdown hr{border:none;border-top:1px solid var(--border);margin:4px 0}
+
+/* === Main === */
+.main{
+  grid-area:main;
+  padding:32px;
+  overflow-y:auto;
+}
+.page{max-width:1200px;margin:0 auto}
+.page h1{font-size:32px;color:var(--navy-900);margin-bottom:8px}
+.page .lede{color:var(--gray-500);font-size:15.5px;margin-bottom:28px}
+.placeholder{
+  background:#fff;border:1px dashed var(--border);border-radius:16px;
+  padding:56px 32px;text-align:center;color:var(--gray-500);
+}
+
+/* === Mobile drawer === */
+.drawer-btn{display:none;background:none;border:none;color:var(--navy-900);cursor:pointer;padding:8px}
+.drawer-btn svg{width:22px;height:22px}
+@media(max-width:900px){
+  body.app{grid-template-columns:1fr}
+  .side{
+    grid-area:auto;position:fixed;top:0;left:0;
+    height:100vh;width:280px;z-index:60;
+    transform:translateX(-100%);transition:transform .3s ease;
+  }
+  .side.open{transform:translateX(0)}
+  .top{grid-column:1/-1;padding:0 20px}
+  .drawer-btn{display:inline-flex;align-items:center}
+  .main{padding:20px}
+  .backdrop{
+    position:fixed;inset:0;background:rgba(5,13,31,.5);
+    z-index:50;display:none;
+  }
+  .backdrop.open{display:block}
+}
