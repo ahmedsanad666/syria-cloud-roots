@@ -339,6 +339,45 @@ body.app{
 .summary-note{font-size:11.5px;color:var(--gray-500);margin-top:6px;text-align:right}
 .summary-panel .btn-continue{width:100%;margin-top:16px;justify-content:center;display:flex;align-items:center}
 
+/* === Payment Method (review sidebar) === */
+.pay-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 20px 40px -24px rgba(5,13,31,.15);margin-top:16px}
+.pay-card h3{font-size:16px;color:var(--navy-900);margin-bottom:14px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800}
+.pay-list{display:flex;flex-direction:column;gap:10px}
+.pay-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:13px 14px;border-radius:12px;border:1.5px solid var(--border);
+  background:#fff;cursor:pointer;transition:all .18s ease;
+}
+.pay-row:hover{border-color:#d6dcef}
+.pay-row .pay-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);color:var(--accent);
+}
+.pay-row .pay-icon svg{width:20px;height:20px}
+.pay-row .pay-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.pay-row .pay-name{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--navy-900);font-family:'Plus Jakarta Sans',sans-serif}
+.pay-row .pay-desc{font-size:12px;line-height:1.45;color:var(--gray-500);display:none}
+.pay-row .pay-desc.expanded{display:block}
+.pay-row .pay-radio{
+  width:18px;height:18px;border-radius:50%;border:2px solid #d0d6e4;flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;transition:all .18s ease;
+}
+.pay-row .pay-radio::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .18s ease}
+/* active selectable row */
+.pay-row.active{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 8px 20px -12px rgba(99,102,241,.45)}
+.pay-row.active .pay-icon{background:var(--accent);color:#fff}
+.pay-row.active .pay-radio{border-color:var(--accent)}
+.pay-row.active .pay-radio::after{transform:scale(1)}
+/* disabled coming-soon rows */
+.pay-row.disabled{opacity:.72;cursor:not-allowed}
+.pay-row.disabled .pay-radio{border-style:dashed;border-color:#c3cad8}
+.pay-row.disabled:hover{border-color:var(--border)}
+.pay-badge{
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 8px;border-radius:999px;background:#eef1f6;color:var(--gray-500);
+}
+
 /* Mobile sticky bottom bar */
 @media(max-width:1000px){
   .summary-panel{position:fixed;left:0;right:0;bottom:0;top:auto;border-radius:18px 18px 0 0;z-index:40;box-shadow:0 -12px 30px -12px rgba(5,13,31,.25);max-height:60vh;overflow-y:auto}

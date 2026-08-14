@@ -109,6 +109,37 @@
             <div class="summary-total"><span class="k">Total</span><span class="v" id="rvTotal">$0<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span></span></div>
             <div class="summary-note">Informational estimate — no payment required</div>
           </div>
+
+          <!-- Payment Method -->
+          <div class="pay-card">
+            <h3>Payment Method</h3>
+            <div class="pay-list" id="payList">
+              <div class="pay-row active" data-pay="cash">
+                <span class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></span>
+                <span class="pay-meta">
+                  <span class="pay-name">Cash Pay</span>
+                  <span class="pay-desc expanded">Pay in cash when our team confirms your setup.</span>
+                </span>
+                <span class="pay-radio"></span>
+              </div>
+              <div class="pay-row disabled" data-pay="epay">
+                <span class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+                <span class="pay-meta">
+                  <span class="pay-name">E-Pay <span class="pay-badge">Coming Soon</span></span>
+                  <span class="pay-desc">Pay securely online with your card.</span>
+                </span>
+                <span class="pay-radio"></span>
+              </div>
+              <div class="pay-row disabled" data-pay="shampay">
+                <span class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/><path d="M3 14a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z"/><circle cx="6" cy="8" r=".6"/><circle cx="6" cy="15" r=".6"/></svg></span>
+                <span class="pay-meta">
+                  <span class="pay-name">Sham Pay <span class="pay-badge">Coming Soon</span></span>
+                  <span class="pay-desc">Pay instantly using your Sham Pay wallet.</span>
+                </span>
+                <span class="pay-radio"></span>
+              </div>
+            </div>
+          </div>
         </aside>
       </div>
     </div>
@@ -228,6 +259,22 @@
     document.getElementById('confirmState').style.display = 'block';
     document.querySelector('.top-title').textContent = 'Request Confirmed';
     window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  // Payment method interaction (UI only)
+  document.getElementById('payList').addEventListener('click', (e) => {
+    const row = e.target.closest('.pay-row');
+    if(!row) return;
+    const desc = row.querySelector('.pay-desc');
+    const isOpen = desc.classList.contains('expanded');
+    // collapse all
+    document.querySelectorAll('.pay-row .pay-desc').forEach(d => d.classList.remove('expanded'));
+    if(!isOpen) desc.classList.add('expanded');
+    // selection only for active/non-disabled rows
+    if(!row.classList.contains('disabled')){
+      document.querySelectorAll('.pay-row').forEach(r => r.classList.remove('active'));
+      row.classList.add('active');
+    }
   });
 })();
 </script>
