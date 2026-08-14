@@ -260,6 +260,22 @@
     document.querySelector('.top-title').textContent = 'Request Confirmed';
     window.scrollTo({top:0,behavior:'smooth'});
   });
+
+  // Payment method interaction (UI only)
+  document.getElementById('payList').addEventListener('click', (e) => {
+    const row = e.target.closest('.pay-row');
+    if(!row) return;
+    const desc = row.querySelector('.pay-desc');
+    const isOpen = desc.classList.contains('expanded');
+    // collapse all
+    document.querySelectorAll('.pay-row .pay-desc').forEach(d => d.classList.remove('expanded'));
+    if(!isOpen) desc.classList.add('expanded');
+    // selection only for active/non-disabled rows
+    if(!row.classList.contains('disabled')){
+      document.querySelectorAll('.pay-row').forEach(r => r.classList.remove('active'));
+      row.classList.add('active');
+    }
+  });
 })();
 </script>
 
