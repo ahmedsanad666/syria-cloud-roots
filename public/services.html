@@ -65,17 +65,51 @@
 
 <div class="filter-bar">
   <div class="container filter-inner">
-    <div class="filter-pills">
-      <button class="fpill active" data-filter="all">All</button>
-      <button class="fpill" data-filter="cloud">Cloud</button>
-      <button class="fpill" data-filter="security">Security</button>
-      <button class="fpill" data-filter="hosting">Hosting</button>
-      <button class="fpill" data-filter="backup">Backup</button>
-      <button class="fpill" data-filter="ai">AI-Ready</button>
+    <button class="f-arrow" id="fPrev" aria-label="Scroll categories left"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
+    <div class="filter-scroll">
+      <div class="filter-pills" id="fPills">
+        <button class="fpill active" data-filter="all">All</button>
+        <button class="fpill" data-filter="cloud">Cloud</button>
+        <button class="fpill" data-filter="security">Security</button>
+        <button class="fpill" data-filter="hosting">Hosting</button>
+        <button class="fpill" data-filter="backup">Backup</button>
+        <button class="fpill" data-filter="ai">AI-Ready</button>
+      </div>
     </div>
-    <div class="search-in">🔍<input id="svcSearch" placeholder="Search services..." /></div>
+    <button class="f-arrow" id="fNext" aria-label="Scroll categories right"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>
+    <label class="search-in" id="searchWrap">
+      <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="svcSearch" placeholder="Search services..." />
+    </label>
   </div>
 </div>
+
+<script>
+(function(){
+  const pills=document.getElementById('fPills'),prev=document.getElementById('fPrev'),next=document.getElementById('fNext');
+  const wrap=document.getElementById('searchWrap'),input=document.getElementById('svcSearch');
+  function update(){
+    const max=pills.scrollWidth-pills.clientWidth-1;
+    const atStart=pills.scrollLeft<=1, atEnd=pills.scrollLeft>=max;
+    pills.classList.toggle('at-start',atStart);
+    pills.classList.toggle('at-end',atEnd);
+    const overflow=max>1;
+    prev.classList.toggle('show',overflow&&!atStart);
+    next.classList.toggle('show',overflow&&!atEnd);
+  }
+  pills.addEventListener('scroll',update);
+  window.addEventListener('resize',update);
+  prev.addEventListener('click',()=>pills.scrollBy({left:-220,behavior:'smooth'}));
+  next.addEventListener('click',()=>pills.scrollBy({left:220,behavior:'smooth'}));
+  pills.addEventListener('click',e=>{
+    const b=e.target.closest('.fpill'); if(!b) return;
+    b.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+  });
+  update();
+  wrap.addEventListener('click',()=>{wrap.classList.add('open');input.focus();});
+  input.addEventListener('blur',()=>{if(!input.value) wrap.classList.remove('open');});
+})();
+</script>
 
 <section class="section-tight">
   <div class="container">
