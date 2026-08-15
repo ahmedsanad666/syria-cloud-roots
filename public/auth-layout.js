@@ -12,7 +12,8 @@
  *
  * The illustrated left panel (gradient, orbs, floating service badges,
  * network lines, logo + heading + subtitle) is generated here so both the
- * Login and Register pages share one source of truth.
+ * Login and Register pages share one source of truth. The whole left
+ * content group is stacked and centered as one balanced block.
  */
 (function () {
   var ICONS = {
@@ -40,26 +41,24 @@
       '<span class="auth-orb auth-orb-1"></span>' +
       '<span class="auth-orb auth-orb-2"></span>' +
       '<span class="auth-orb auth-orb-3"></span>' +
-      '<div class="auth-art" aria-hidden="true">' +
-        '<svg class="auth-net" viewBox="0 0 100 100" preserveAspectRatio="none">' +
-          '<path d="M18 20 C40 26, 55 14, 82 28" />' +
-          '<path d="M30 50 C46 44, 62 62, 78 58" />' +
-          '<circle cx="18" cy="20" /><circle cx="82" cy="28" /><circle cx="30" cy="50" /><circle cx="78" cy="58" />' +
-        '</svg>' +
-        badge('b1', 'cloud', 'Cloud') +
-        badge('b2', 'server', 'Dedicated servers') +
-        badge('b3', 'shield', 'Security') +
-        badge('b4', 'database', 'Backup') +
-      '</div>' +
-      '<div class="auth-aside-top">' +
-        '<a href="' + home + '" class="brand">' +
+      '<div class="auth-content">' +
+        '<a href="' + home + '" class="auth-brand">' +
           '<svg class="brand-icon" viewBox="0 0 40 40" fill="none">' +
             '<path d="M12 20c0-4 3-7 7-7s7 3 7 7-3 7-7 7" stroke="#F07030" stroke-width="3" stroke-linecap="round"/>' +
             '<path d="M28 20c0-4-3-7-7-7s-7 3-7 7 3 7 7 7" stroke="#3B8BEB" stroke-width="3" stroke-linecap="round"/>' +
           '</svg> Sham Cloud' +
         '</a>' +
-      '</div>' +
-      '<div class="auth-aside-body">' +
+        '<div class="auth-cluster" aria-hidden="true">' +
+          '<svg class="auth-net" viewBox="0 0 100 12" preserveAspectRatio="none">' +
+            '<path d="M6 6 H94" />' +
+            '<path d="M6 6 H94" />' +
+            '<circle cx="6" cy="6" /><circle cx="94" cy="6" />' +
+          '</svg>' +
+          badge('b1', 'cloud', 'Cloud') +
+          badge('b2', 'server', 'Dedicated servers') +
+          badge('b3', 'shield', 'Security') +
+          badge('b4', 'database', 'Backup') +
+        '</div>' +
         (eyebrow ? '<span class="auth-eyebrow">' + eyebrow + '</span>' : '') +
         (heading ? '<h1>' + heading + '</h1>' : '') +
         (subtitle ? '<p>' + subtitle + '</p>' : '') +
