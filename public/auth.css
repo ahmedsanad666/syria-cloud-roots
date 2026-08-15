@@ -1,0 +1,139 @@
+/* === Sham Cloud — AuthLayout (reusable two-column auth shell) === */
+
+.auth-shell{
+  display:grid;
+  grid-template-columns:45% 1fr;
+  min-height:100vh;
+  background:var(--gray-100);
+}
+
+/* ---------- Left illustrated panel ---------- */
+.auth-aside{
+  position:relative;
+  overflow:hidden;
+  color:#fff;
+  padding:150px 56px 72px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:linear-gradient(150deg,#050D1F 0%,#0A1628 35%,#1A3460 70%,#3B2C7A 100%);
+}
+/* dot texture */
+.auth-aside::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(91,163,245,.18) 1px,transparent 0);
+  background-size:28px 28px;opacity:.5;
+  mask-image:radial-gradient(ellipse at 40% 40%,#000 35%,transparent 78%);
+  pointer-events:none;
+}
+/* soft blurred orbs */
+.auth-orb{position:absolute;border-radius:50%;filter:blur(20px);pointer-events:none}
+.auth-orb-1{width:520px;height:520px;top:-140px;right:-160px;background:radial-gradient(circle,rgba(124,92,255,.38),transparent 65%)}
+.auth-orb-2{width:460px;height:460px;bottom:-160px;left:-140px;background:radial-gradient(circle,rgba(59,139,235,.32),transparent 68%)}
+.auth-orb-3{width:300px;height:300px;top:34%;left:38%;background:radial-gradient(circle,rgba(240,112,48,.22),transparent 66%)}
+
+/* network lines + badges layer */
+.auth-art{position:absolute;inset:0;z-index:1;pointer-events:none}
+.auth-net{position:absolute;inset:0;width:100%;height:100%}
+.auth-net path{fill:none;stroke:rgba(255,255,255,.22);stroke-width:1;stroke-dasharray:5 7;animation:authFlow 6s linear infinite}
+.auth-net path:nth-child(2){animation-duration:8s;stroke:rgba(91,163,245,.35)}
+.auth-net circle{fill:rgba(255,255,255,.6);r:2.5}
+@keyframes authFlow{to{stroke-dashoffset:-96}}
+
+.auth-badge{
+  position:absolute;
+  width:60px;height:60px;border-radius:18px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.6);
+  backdrop-filter:blur(10px);
+  box-shadow:0 22px 44px -18px rgba(5,13,31,.75);
+  opacity:0;
+  animation:authPop .7s cubic-bezier(.2,.8,.25,1) forwards, authBob 6s ease-in-out infinite;
+}
+.auth-badge svg{width:26px;height:26px}
+.auth-badge.b1{top:16%;left:14%;animation-delay:.15s,.9s;animation-duration:.7s,5.4s}
+.auth-badge.b2{top:26%;right:16%;width:70px;height:70px;animation-delay:.3s,1.2s;animation-duration:.7s,6.6s}
+.auth-badge.b2 svg{width:30px;height:30px}
+.auth-badge.b3{top:47%;left:26%;width:52px;height:52px;animation-delay:.45s,.4s;animation-duration:.7s,7.4s}
+.auth-badge.b3 svg{width:23px;height:23px}
+.auth-badge.b4{top:56%;right:22%;animation-delay:.6s,1.8s;animation-duration:.7s,6s}
+
+@keyframes authPop{from{opacity:0;transform:translateY(14px) scale(.86)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes authBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media(prefers-reduced-motion:reduce){
+  .auth-badge{animation:authPop .01s forwards}
+  .auth-net path{animation:none}
+}
+
+.auth-aside-body{position:relative;z-index:2;max-width:460px;animation:authPop .8s ease forwards}
+.auth-aside .brand{margin-bottom:auto}
+.auth-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
+  border:1px solid rgba(91,163,245,.35);background:rgba(59,139,235,.12);
+  border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:#8FC0FF;
+}
+.auth-aside h1{
+  color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+  font-size:clamp(44px,5.4vw,76px);line-height:1;letter-spacing:-.03em;margin:20px 0 16px;
+}
+.auth-aside p{color:rgba(255,255,255,.72);font-size:17px;line-height:1.7}
+
+.auth-aside-top{
+  position:absolute;top:0;left:0;right:0;padding:120px 56px 0;z-index:2;
+}
+
+/* ---------- Right form panel ---------- */
+.auth-main{
+  display:flex;align-items:center;justify-content:center;
+  padding:130px 40px 72px;
+  background:var(--gray-100);
+}
+.auth-card{
+  width:100%;max-width:460px;
+  background:#fff;border:1px solid var(--gray-200);border-radius:24px;
+  box-shadow:var(--shadow-lg);
+  padding:40px;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:980px){
+  .auth-shell{grid-template-columns:1fr}
+  .auth-aside{
+    padding:110px 28px 44px;min-height:auto;justify-content:flex-end;
+  }
+  .auth-aside h1{font-size:clamp(34px,9vw,48px)}
+  .auth-aside p{font-size:15px}
+  .auth-badge.b1{top:auto;bottom:22%;left:auto;right:14%}
+  .auth-badge.b3,.auth-badge.b4{display:none}
+  .auth-badge.b2{top:38%;right:8%;width:56px;height:56px}
+  .auth-badge.b2 svg{width:24px;height:24px}
+  .auth-main{padding:40px 20px 64px}
+  .auth-card{padding:28px;box-shadow:0 18px 40px -24px rgba(5,13,31,.3)}
+}
+@media(max-width:560px){
+  .auth-orb-3{display:none}
+  .auth-badge{display:none}
+}
+
+/* ---------- Form primitives (shared by login/register) ---------- */
+.auth-card h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;font-weight:800;color:var(--navy-900);letter-spacing:-.02em}
+.auth-card .lead{font-size:14px;color:var(--gray-500);margin-top:6px}
+.field{margin-top:18px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--navy-900);margin-bottom:8px}
+.field input{
+  width:100%;height:50px;padding:0 14px;border-radius:12px;
+  border:1.5px solid var(--gray-200);background:#F8FAFF;
+  font-family:'Inter',sans-serif;font-size:15px;color:var(--navy-900);
+  transition:border-color .2s, box-shadow .2s, background .2s;
+}
+.field input:focus{outline:none;border-color:var(--blue-500);background:#fff;box-shadow:0 0 0 4px rgba(59,139,235,.14)}
+.auth-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+.auth-check{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--gray-700);cursor:pointer}
+.auth-check input{width:16px;height:16px;accent-color:var(--blue-500)}
+.auth-link{color:var(--blue-500);font-size:14px;font-weight:600}
+.auth-link:hover{text-decoration:underline}
+.btn-auth{width:100%;height:52px;margin-top:24px;background:var(--blue-500);color:#fff}
+.btn-auth:hover{background:var(--blue-400);box-shadow:0 14px 30px -10px rgba(59,139,235,.55)}
+.auth-alt{margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-200);font-size:14px;color:var(--gray-500);text-align:center}
