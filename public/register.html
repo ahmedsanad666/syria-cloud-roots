@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Register — Sham Cloud</title>
+<meta name="description" content="Create your Sham Cloud account and start managing plans, support and services in one place." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/auth.css" />
+<style>.nav{background:var(--navy-950)}.nav.scrolled{background:var(--navy-950)}</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/home.html" class="brand">
+      <svg class="brand-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 20c0-4 3-7 7-7s7 3 7 7-3 7-7 7" stroke="#F07030" stroke-width="3" stroke-linecap="round"/>
+        <path d="M28 20c0-4-3-7-7-7s-7 3-7 7 3 7 7 7" stroke="#3B8BEB" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      Sham Cloud
+    </a>
+    <ul class="nav-links">
+      <li><a href="/home.html">Home</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/blogs.html">News</a></li>
+      <li><a href="/about.html">About Us</a></li>
+      <li><a href="/contact.html">Contact Us</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <span class="lang">AR | EN</span>
+      <a href="/login.html" class="nav-signin">Sign In</a>
+      <a href="/register.html" class="btn btn-primary">Register</a>
+      <button class="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu">
+    <a href="/home.html">Home</a>
+    <a href="/services.html">Services</a>
+    <a href="/blogs.html">News</a>
+    <a href="/about.html">About Us</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/contact.html">Contact Us</a>
+  </div>
+</nav>
+
+<section class="auth-shell" data-auth-layout
+  data-eyebrow="Get started"
+  data-heading="Register"
+  data-subtitle="Create your Sham Cloud account and start managing plans, support and services with the same site experience.">
+  <div class="auth-main">
+    <div class="auth-card">
+      <h2>Register</h2>
+      <p class="lead">It only takes a minute to get started.</p>
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="rgName">Full name</label>
+          <input id="rgName" name="name" type="text" placeholder="Sami Al-Ahmad" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="rgEmail">Email</label>
+          <input id="rgEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="rgPhone">Mobile</label>
+          <input id="rgPhone" name="phone" type="tel" placeholder="+963 9XX XXX XXX" autocomplete="tel" required />
+        </div>
+        <div class="field">
+          <label for="rgPass">Password</label>
+          <input id="rgPass" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" required />
+        </div>
+        <div class="field">
+          <label for="rgPass2">Confirm password</label>
+          <input id="rgPass2" name="password2" type="password" placeholder="Repeat your password" autocomplete="new-password" required />
+        </div>
+        <button type="submit" class="btn btn-auth">Create Account</button>
+      </form>
+      <div class="auth-alt">Already have an account? <a class="auth-link" href="/login.html">Sign in</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/home.html" class="brand">
+          <svg class="brand-icon" viewBox="0 0 40 40" fill="none"><path d="M12 20c0-4 3-7 7-7s7 3 7 7-3 7-7 7" stroke="#F07030" stroke-width="3" stroke-linecap="round"/><path d="M28 20c0-4-3-7-7-7s-7 3-7 7 3 7 7 7" stroke="#3B8BEB" stroke-width="3" stroke-linecap="round"/></svg>
+          Sham Cloud
+        </a>
+        <p class="footer-desc">Sham Cloud is a local cloud and hosting services platform by Mijad Technology Services, enabling organizations in Syria to host, operate, secure, and scale their digital services through a licensed, reliable, and locally supported cloud infrastructure.</p>
+      </div>
+      <div>
+        <h5>Menu</h5>
+        <ul>
+          <li><a href="/home.html">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+          <li><a href="/blogs.html">Blogs</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Useful links</h5>
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Service Terms</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact Us</h5>
+        <ul>
+          <li>Sham Cloud</li>
+          <li>Powered by Mijad Technology Services Company</li>
+          <li>info@mijadtechnology.com</li>
+          <li>+963 95 3667723</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sham Cloud · powered by Mijad Technology Services</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/script.js"></script>
+<script src="/auth-layout.js"></script>
+<script>
+  document.getElementById('registerForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var p = document.getElementById('rgPass').value, p2 = document.getElementById('rgPass2').value;
+    if (p.length < 8) { alert('Password must be at least 8 characters.'); return; }
+    if (p !== p2) { alert('Passwords do not match.'); return; }
+    window.location.href = '/dashboard/index.html';
+  });
+</script>
+</body>
+</html>
