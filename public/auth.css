@@ -141,3 +141,11 @@
 /* mobile drawer stays hidden until toggled */
 .mobile-menu{display:none}
 .mobile-menu.open{display:flex}
+
+@media(max-width:980px){
+  .auth-aside-top{display:none}      /* nav already shows the logo on small screens */
+  .auth-aside{padding-top:130px}
+}
+@media(max-width:560px){
+  .auth-net{display:none}
+}
