@@ -85,12 +85,33 @@
         <p>You can adjust or add resources with add-ons in the next step.</p>
       </div>
 
+      <div class="billing-period">
+        <div class="billing-period-copy">
+          <span class="billing-period-label">Billing period</span>
+          <strong>Choose the plan duration that suits you</strong>
+        </div>
+        <label class="billing-select" for="billingPeriod">
+          <span class="sr-only">Select billing period</span>
+          <select id="billingPeriod">
+            <option value="1">Monthly</option>
+            <option value="6">6 Months</option>
+            <option value="12">12 Months</option>
+          </select>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </label>
+      </div>
+
       <div class="plan-grid" id="planGrid">
-        <div class="plan-card" data-tier="standard" data-plan="Starter" data-price="29" tabindex="0" role="button" aria-pressed="false">
+        <div class="plan-card" data-tier="standard" data-plan="Starter" data-price="29" data-usd-monthly="29" data-syp-monthly="320700" tabindex="0" role="button" aria-pressed="false">
+          <span class="trial-ribbon">7-Day Free Trial</span>
           <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
           <span class="plan-tier">Standard</span>
           <div class="plan-name">Starter</div>
-          <div class="plan-price"><span class="per">Starting at</span><span class="amt">$29</span><span class="per">/mo</span></div>
+          <div class="dual-price">
+            <div class="currency-block"><span class="currency-label">Dollar</span><div><span class="currency-symbol">$</span><strong class="usd-amount">29</strong></div></div>
+            <div class="currency-block"><span class="currency-label">Syrian Pound</span><div><span class="currency-symbol">₺</span><strong class="syp-amount">320,700</strong></div></div>
+            <span class="price-period">per month</span>
+          </div>
           <ul class="plan-specs">
             <li><span class="k">vCPU</span><span class="v">2 cores</span></li>
             <li><span class="k">RAM</span><span class="v">4 GB</span></li>
@@ -99,11 +120,17 @@
             <li><span class="k">Bandwidth</span><span class="v">2 TB / mo</span></li>
           </ul>
         </div>
-        <div class="plan-card" data-tier="professional" data-plan="Business" data-price="79" tabindex="0" role="button" aria-pressed="false">
+        <div class="plan-card featured" data-tier="professional" data-plan="Business" data-price="79" data-usd-monthly="79" data-syp-monthly="873700" tabindex="0" role="button" aria-pressed="false">
+          <span class="popular-ribbon">Most popular</span>
+          <span class="trial-ribbon">7-Day Free Trial</span>
           <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
           <span class="plan-tier">Professional</span>
           <div class="plan-name">Business</div>
-          <div class="plan-price"><span class="per">Starting at</span><span class="amt">$79</span><span class="per">/mo</span></div>
+          <div class="dual-price">
+            <div class="currency-block"><span class="currency-label">Dollar</span><div><span class="currency-symbol">$</span><strong class="usd-amount">79</strong></div></div>
+            <div class="currency-block"><span class="currency-label">Syrian Pound</span><div><span class="currency-symbol">₺</span><strong class="syp-amount">873,700</strong></div></div>
+            <span class="price-period">per month</span>
+          </div>
           <ul class="plan-specs">
             <li><span class="k">vCPU</span><span class="v">4 cores</span></li>
             <li><span class="k">RAM</span><span class="v">8 GB</span></li>
@@ -112,11 +139,16 @@
             <li><span class="k">Bandwidth</span><span class="v">5 TB / mo</span></li>
           </ul>
         </div>
-        <div class="plan-card" data-tier="enterprise" data-plan="Scale" data-price="179" tabindex="0" role="button" aria-pressed="false">
+        <div class="plan-card" data-tier="enterprise" data-plan="Scale" data-price="179" data-usd-monthly="179" data-syp-monthly="1979600" tabindex="0" role="button" aria-pressed="false">
+          <span class="trial-ribbon">7-Day Free Trial</span>
           <div class="plan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></div>
           <span class="plan-tier">Enterprise</span>
           <div class="plan-name">Scale</div>
-          <div class="plan-price"><span class="per">Starting at</span><span class="amt">$179</span><span class="per">/mo</span></div>
+          <div class="dual-price">
+            <div class="currency-block"><span class="currency-label">Dollar</span><div><span class="currency-symbol">$</span><strong class="usd-amount">179</strong></div></div>
+            <div class="currency-block"><span class="currency-label">Syrian Pound</span><div><span class="currency-symbol">₺</span><strong class="syp-amount">1,979,600</strong></div></div>
+            <span class="price-period">per month</span>
+          </div>
           <ul class="plan-specs">
             <li><span class="k">vCPU</span><span class="v">8 cores</span></li>
             <li><span class="k">RAM</span><span class="v">16 GB</span></li>
@@ -238,15 +270,47 @@
   const sumTotalMini = document.getElementById('summaryTotalMini');
   const summaryPanel = document.getElementById('summaryPanel');
   const summaryToggle = document.getElementById('summaryToggle');
+  const billingPeriod = document.getElementById('billingPeriod');
 
-  let selectedPlan = null; // {name, price}
+  let selectedPlan = null; // {name, price, sypPrice, period, periodLabel}
   const selectedAddons = new Map(); // name -> price
 
   function fmt(n){ return '$' + n; }
+  function formatNumber(n){ return new Intl.NumberFormat('en-US').format(n); }
+  function getPeriod(){
+    const months = parseInt(billingPeriod.value, 10);
+    return { months, label: billingPeriod.options[billingPeriod.selectedIndex].text };
+  }
+
+  function updatePlanPrices(){
+    const period = getPeriod();
+    planCards.forEach(card => {
+      const usd = parseFloat(card.dataset.usdMonthly) * period.months;
+      const syp = parseFloat(card.dataset.sypMonthly) * period.months;
+      card.dataset.price = String(usd);
+      card.querySelector('.usd-amount').textContent = formatNumber(usd);
+      card.querySelector('.syp-amount').textContent = formatNumber(syp);
+      card.querySelector('.price-period').textContent = period.months === 1 ? 'per month' : 'total for ' + period.label.toLowerCase();
+    });
+    const active = document.querySelector('#planGrid .plan-card.selected');
+    if(active) setSelectedPlan(active);
+    renderSummary();
+  }
+
+  function setSelectedPlan(card){
+    const period = getPeriod();
+    selectedPlan = {
+      name: card.dataset.plan,
+      price: parseFloat(card.dataset.price),
+      sypPrice: parseFloat(card.dataset.sypMonthly) * period.months,
+      period: period.months,
+      periodLabel: period.label
+    };
+  }
 
   function renderSummary(){
     if(selectedPlan){
-      sumPlan.textContent = selectedPlan.name + ' — ' + fmt(selectedPlan.price) + '/mo';
+      sumPlan.textContent = selectedPlan.name + ' — ' + fmt(selectedPlan.price) + ' / ' + selectedPlan.periodLabel;
     } else {
       sumPlan.textContent = '—';
     }
@@ -261,8 +325,9 @@
     }
     let total = (selectedPlan ? selectedPlan.price : 0);
     selectedAddons.forEach(p => total += p);
-    sumTotal.innerHTML = fmt(total) + '<span style="font-size:13px;color:var(--gray-500);font-weight:500">/mo</span>';
-    if(sumTotalMini) sumTotalMini.textContent = fmt(total) + '/mo';
+    const totalSuffix = selectedPlan ? ' / ' + selectedPlan.periodLabel : '';
+    sumTotal.innerHTML = fmt(total) + '<span style="font-size:13px;color:var(--gray-500);font-weight:500">'+totalSuffix+'</span>';
+    if(sumTotalMini) sumTotalMini.textContent = fmt(total) + totalSuffix;
     if(selectedPlan){
       reviewBtn.disabled = false;
       reviewBtn.classList.add('on');
@@ -276,7 +341,7 @@
     planCards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
     card.classList.add('selected');
     card.setAttribute('aria-pressed','true');
-    selectedPlan = { name: card.dataset.plan, price: parseFloat(card.dataset.price) };
+    setSelectedPlan(card);
     continueBtn.disabled = false;
     continueBtn.classList.add('on');
     addonsWrap.classList.add('on');
@@ -287,6 +352,7 @@
     c.addEventListener('click', () => selectPlan(c));
     c.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectPlan(c); } });
   });
+  billingPeriod.addEventListener('change', updatePlanPrices);
 
   continueBtn.addEventListener('click', () => {
     addonsWrap.scrollIntoView({behavior:'smooth', block:'start'});
@@ -337,7 +403,7 @@
     it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
   });
 
-  renderSummary();
+  updatePlanPrices();
 })();
 </script>
 
