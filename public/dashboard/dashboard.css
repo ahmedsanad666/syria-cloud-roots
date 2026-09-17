@@ -305,7 +305,7 @@ body.app{
 .plan-specs .k{color:var(--gray-500)}
 .plan-specs .v{color:var(--navy-900);font-weight:600}
 .plan-check{
-  position:absolute;top:16px;right:16px;
+  position:absolute;top:76px;right:18px;
   width:26px;height:26px;border-radius:50%;
   border:2px solid var(--border);background:#fff;
   display:flex;align-items:center;justify-content:center;
